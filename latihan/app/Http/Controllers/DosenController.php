@@ -12,8 +12,8 @@ class DosenController extends Controller
      */
     public function index()
     {
-        $data = Dosen::all();
-        return view('dosen.index', compact('data'));
+        
+        return view('dosen.index');
     }
 
     /**

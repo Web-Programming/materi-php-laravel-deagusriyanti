@@ -16,8 +16,11 @@
                 <form>
                     <div class="card-body">
                         <div class="mb-3">
-                            <label for="id" class="form-label">Id_Prodi</label>
-                            <input type="text" class="form-control" id="nip" placeholder="Masukkan id prodi">
+                            <label for="idprodi" class="form-label">Id_Prodi</label>
+                            <input type="text" class="form-control" id="idprodi" placeholder="Masukkan id prodi">
+                            {{-- @error(idprodi)
+                               <p class ="text-danger">{{ $message }}</p> 
+                            @enderror --}}
                         </div>
 
                         <div class="mb-3">

@@ -1,107 +1,102 @@
 @extends('layout.master')
 
-@section('title', 'Data Dosen')
+@section('title', "Halaman Detail Prodi")
 
 @section('content')
-<div class="container-fluid pt-4">
-    <h3 class="mb-5 text-center">Data Dosen</h3>
-
-    <div class="row justify-content-center">
-
-        {{-- Dosen 1 --}}
-        <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
-            <div class="small-box d-flex flex-column align-items-center justify-content-center text-white"
-                style="height: 200px; border-radius: 0.5rem; padding: 1rem; background-color: #E5958E;">
-                <div class="inner text-center w-100">
-                    <h2 class="mt-2">Dr. Fear</h2>
-                    <h4 class="mt-2">Manajemen</h4>
-                </div>
-                <div class="button-group d-flex justify-content-center mt-3 gap-4">
-                    <a href="{{ url('/dosen/delete') }}" class="btn btn-sm btn-danger">Delete</a>
-                </div>
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">Program Studi</h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="{{ url("/") }}">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{{ url("/prodi") }}">Program Studi</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Create Program Studi</li>
+                </ol>
+              </div>
             </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
         </div>
-
-        {{-- Dosen 2 --}}
-        <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
-            <div class="small-box d-flex flex-column align-items-center justify-content-center text-white"
-                style="height: 200px; border-radius: 0.5rem; padding: 1rem; background-color: #E5958E;">
-                <div class="inner text-center w-100">
-                    <h2 class="mt-2">Dr. Sadness</h2>
-                    <h4 class="mt-2">Akuntansi</h4>
-                </div>
-                <div class="button-group d-flex justify-content-center mt-3 gap-4">
-                    <a href="{{ url('/dosen/delete') }}" class="btn btn-sm btn-danger">Delete</a>
-                </div>
-            </div>
-        </div>
-
-        {{-- Dosen 3 --}}
-        <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
-            <div class="small-box d-flex flex-column align-items-center justify-content-center text-white"
-                style="height: 200px; border-radius: 0.5rem; padding: 1rem; background-color: #E5958E;">
-                <div class="inner text-center w-100">
-                    <h2 class="mt-2">Prof. Bing Bong</h2>
-                    <h4 class="mt-2">Informatika</h4>
-                </div>
-                <div class="button-group d-flex justify-content-center mt-3 gap-4">
-                    <a href="{{ url('/dosen/delete') }}" class="btn btn-sm btn-danger">Delete</a>
-                </div>
-            </div>
-        </div>
-
-        {{-- Dosen 4 --}}
-        <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
-            <div class="small-box d-flex flex-column align-items-center justify-content-center text-white"
-                style="height: 200px; border-radius: 0.5rem; padding: 1rem; background-color: #E5958E;">
-                <div class="inner text-center w-100">
-                    <h2 class="mt-2">Dr. Joy</h2>
-                    <h4 class="mt-2">Sistem Informasi</h4>
-                </div>
-                <div class="button-group d-flex justify-content-center mt-3 gap-4">
-                    <a href="{{ url('/dosen/delete') }}" class="btn btn-sm btn-danger">Delete</a>
-                </div>
-            </div>
-        </div>
-
-        {{-- Dosen 5 --}}
-        <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
-            <div class="small-box d-flex flex-column align-items-center justify-content-center text-white"
-                style="height: 200px; border-radius: 0.5rem; padding: 1rem; background-color: #E5958E;">
-                <div class="inner text-center w-100">
-                    <h2 class="mt-2">Prof. Anger</h2>
-                    <h4 class="mt-2">Teknik Elektro</h4>
-                </div>
-                <div class="button-group d-flex justify-content-center mt-3 gap-4">
-                    <a href="{{ url('/dosen/delete') }}" class="btn btn-sm btn-danger">Delete</a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="row">
-        <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
-            <a href="{{ url('/dosen/create') }}" class="btn btn-primary btn-lg w-100 d-flex align-items-center justify-content-center gap-2">
-                Create Dosen
-                <svg fill="currentColor" width="24" height="24" viewBox="0 0 24 24">
-                    <path d="M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM19.75 7.5a.75.75 0 00-1.5 0v2.25H16a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H22a.75.75 0 000-1.5h-2.25V7.5z"></path>
-                </svg>
-            </a>
-        </div>
-
-       <div class="col-lg-4 col-md-8 col-sm-6 col-6 mb-4">
-    <a href="{{ url('/dosen/detail') }}" class="btn btn-light btn-lg w-75">
-        Detail
-    </a>
-</div>
-</div>
-
-
-    </div>
-
-
+        <!--end::App Content Header-->
+        <!--begin::App Content-->
+        <div class="app-content">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-12">
+                <!-- Default box -->
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Program Studi</h3>
+                    <div class="card-tools">
+                      <button
+                        type="button"
+                        class="btn btn-tool"
+                        data-lte-toggle="card-collapse"
+                        title="Collapse"
+                      >
+                        <i data-lte-icon="expand" class="bi bi-plus-lg"></i>
+                        <i data-lte-icon="collapse" class="bi bi-dash-lg"></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-tool"
+                        data-lte-toggle="card-remove"
+                        title="Remove"
+                      >
+                        <i class="bi bi-x-lg"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <form action="{{ url("/prodi")}}" method="post">
+                      @csrf
+                      <div class="">
+                        <label class="">Fakultas</label>
+                        <select class="form-control" name="fakultas_id">
+                          <option value="">Pilih Fakultas</option>
+                          @foreach ($fakultas as $item)
+                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                          @endforeach
+                        </select>
                         
-
-</div>
+                        @error("kode_prodi")
+                          <p class="text-danger"> {{ $message }} </p>
+                        @enderror
+                      </div> 
+                      <div class="">
+                        <label class="">Kode Prodi</label>
+                        <input class="form-control" type="text" name="kode_prodi" value="{{ old("kode_prodi") }}">
+                        @error("kode_prodi")
+                          <p class="text-danger"> {{ $message }} </p>
+                        @enderror
+                      </div>   
+                      <div class="">
+                        <label class="">Nama Prodi</label>
+                        <input class="form-control" type="text" name="nama" value="{{ old("nama") }}">
+                        @error("nama")
+                          <p class="text-danger"> {{ $message }} </p>
+                        @enderror
+                      </div>                            
+                      <button type="submit" class="btn btn-success">Simpan</button>
+                    </form>
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="card-footer">Footer</div>
+                  <!-- /.card-footer-->
+                </div>
+                <!-- /.card -->
+              </div>
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content-->
 @endsection

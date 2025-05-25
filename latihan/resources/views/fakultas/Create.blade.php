@@ -1,43 +1,83 @@
 @extends('layout.master')
 
-@section('title', 'Create Dosen')
+@section('title', "Halaman Detail fakultas")
 
 @section('content')
-<div class="container pt-4 mt-5">
-    <h3 class="mb-4 text-center">Form Tambah Fakultas</h3>
-
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card card-primary card-outline mb-4">
-                <div class="card-header">
-                    <div class="card-title">Input Data Fakultas</div>
-                </div>
-
-                <form>
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <label for="nip" class="form-label">Id_Fakultas</label>
-                            <input type="text" class="form-control" id="nip" placeholder="Masukkan NIP">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="nama" class="form-label">Fakultas</label>
-                            <input type="text" class="form-control" id="nama" placeholder="Masukkan Nama Dosen">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="fakultas" class="form-label">Dekan</label>
-                            <input type="text" class="form-control" id="fakultas" placeholder="Masukkan Fakultas">
-                        </div>
-
-                    <div class="card-footer text-end">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <a href="{{ url('/fakultas') }}" class="btn btn-secondary">Kembali</a>
-                    </div>
-                </form>
-
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">Fakultas</h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="{{ url("/") }}">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{{ url("/fakultas") }}">Fakultas</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Create Fakultas</li>
+                </ol>
+              </div>
             </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
         </div>
-    </div>
-</div>
+        <!--end::App Content Header-->
+        <!--begin::App Content-->
+        <div class="app-content">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-12">
+                <!-- Default box -->
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Fakultas</h3>
+                    <div class="card-tools">
+                      <button
+                        type="button"
+                        class="btn btn-tool"
+                        data-lte-toggle="card-collapse"
+                        title="Collapse"
+                      >
+                        <i data-lte-icon="expand" class="bi bi-plus-lg"></i>
+                        <i data-lte-icon="collapse" class="bi bi-dash-lg"></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-tool"
+                        data-lte-toggle="card-remove"
+                        title="Remove"
+                      >
+                        <i class="bi bi-x-lg"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <form action="{{ url("/fakultas")}}" method="post">
+                      @csrf
+                     
+                      <div class="">
+                        <label class="">Nama fakultas</label>
+                        <input class="form-control" type="text" name="nama" value="{{ old("nama") }}">
+                        @error("nama")
+                          <p class="text-danger"> {{ $message }} </p>
+                        @enderror
+                      </div>                            
+                      <button type="submit" class="btn btn-success">Simpan</button>
+                    </form>
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="card-footer">Footer</div>
+                  <!-- /.card-footer-->
+                </div>
+                <!-- /.card -->
+              </div>
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content-->
 @endsection
