@@ -1,122 +1,75 @@
 @extends('layout.master')
 
-@section('title', 'Detail Dosen')
+@section('title', "Halaman Detail Prodi")
 
 @section('content')
-<div class="container pt-4">
-    <h4 class="mb-4 text-center">Detail Prodi</h4>
-
-    <div class="row justify-content-center">
-
-        <div class="col-md-5 col-sm-8 col-11 mb-4">
-            <div class="card shadow-sm" style="border-radius: 10px;">
-                <div class="card-header py-2 bg-primary text-white text-center">
-                    <strong>Dosen Sistem Informasi</strong>
-                </div>
-                <div class="card-body py-3 px-4">
-                    <p><strong>Deskripsi:</strong>  Program Studi Sistem Informasi berfokus pada integrasi teknologi informasi dengan proses bisnis untuk meningkatkan efisiensi dan efektivitas organisasi.</p>
-                    <p><strong>Akreditasi:</strong> A</p>
-                    <p><strong>Dosen Pengampu:</strong></p>
-                    <ul>
-                        <li>Dr. Andi Wijaya, M.M.</li>
-                        <li>Prof. Siti Rahmawati, M.B.A.</li>
-                        <li>Ir. Budi Santoso, M.M.</li>
-                    </ul>
-                </div>
-                <div class="card-footer text-end bg-light py-2">
-                    <a href="{{ url('/prodi') }}" class="btn btn-sm btn-outline-primary">Kembali</a>
-                </div>
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">Program Studi</h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="{{ url("/") }}">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{{ url("/prodi") }}">Program Studi</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Detail Program Studi</li>
+                </ol>
+              </div>
             </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
         </div>
-
-   
-        <div class="col-md-5 col-sm-8 col-11 mb-4">
-            <div class="card shadow-sm" style="border-radius: 10px;">
-                <div class="card-header py-2 bg-success text-white text-center">
-                    <strong>Informatika</strong>
+        <!--end::App Content Header-->
+        <!--begin::App Content-->
+        <div class="app-content">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-12">
+                <!-- Default box -->
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Program Studi : {{ $prodi->nama }}</h3>
+                    <div class="card-tools">
+                      <button
+                        type="button"
+                        class="btn btn-tool"
+                        data-lte-toggle="card-collapse"
+                        title="Collapse"
+                      >
+                        <i data-lte-icon="expand" class="bi bi-plus-lg"></i>
+                        <i data-lte-icon="collapse" class="bi bi-dash-lg"></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-tool"
+                        data-lte-toggle="card-remove"
+                        title="Remove"
+                      >
+                        <i class="bi bi-x-lg"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    ID Prodi : {{ $prodi->id }} <br>
+                    Kode Prodi : {{ $prodi->kode_prodi }} <br>
+                    Tanggal Buat : {{ $prodi->created_at }} <br>
+                    Tanggal Update : {{ $prodi->updated_at }} <br>
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="card-footer">Footer</div>
+                  <!-- /.card-footer-->
                 </div>
-                <div class="card-body py-3 px-4">
-                    <p><strong>Deskripsi:</strong>  Program Studi Informatika mempelajari pengembangan perangkat lunak, algoritma, dan teknologi komputer untuk menyelesaikan berbagai masalah komputasi.</p>
-                    <p><strong>Akreditasi:</strong> A</p>
-                    <p><strong>Dosen Pengampu:</strong></p>
-                    <ul>
-                        <li>Dr. Andi Wijaya, M.M.</li>
-                        <li>Prof. Siti Rahmawati, M.B.A.</li>
-                        <li>Ir. Budi Santoso, M.M.</li>
-                    </ul>
-                </div>
-                <div class="card-footer text-end bg-light py-2">
-                    <a href="{{ url('/prodi') }}" class="btn btn-sm btn-outline-success">Kembali</a>
-                </div>
+                <!-- /.card -->
+              </div>
             </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
         </div>
-
-       
-        <div class="col-md-5 col-sm-8 col-11 mb-4">
-            <div class="card shadow-sm" style="border-radius: 10px;">
-                <div class="card-header py-2 bg-danger text-white text-center">
-                    <strong>Akuntansi</strong>
-                </div>
-                <div class="card-body py-3 px-4">
-                    <p><strong>Deskripsi:</strong>Program Studi Akuntansi mempelajari pencatatan, pengelolaan, dan pelaporan keuangan dalam organisasi untuk mendukung pengambilan keputusan yang tepat.</p>
-                    <p><strong>Akreditasi:</strong> A</p>
-                    <p><strong>Dosen Pengampu:</strong></p>
-                    <ul>
-                        <li>Dr. Andi Wijaya, M.M.</li>
-                        <li>Prof. Siti Rahmawati, M.B.A.</li>
-                        <li>Ir. Budi Santoso, M.M.</li>
-                    </ul>
-                </div>
-                <div class="card-footer text-end bg-light py-2">
-                    <a href="{{ url('/prodi') }}" class="btn btn-sm btn-outline-danger">Kembali</a>
-                </div>
-            </div>
-        </div>
-
-        {{-- Dosen 4 --}}
-        <div class="col-md-5 col-sm-8 col-11 mb-4">
-            <div class="card shadow-sm" style="border-radius: 10px;">
-                <div class="card-header py-2 bg-warning text-white text-center">
-                    <strong>Manajemen</strong>
-                </div>
-                <div class="card-body py-3 px-4">
-                    <p><strong>Deskripsi:</strong> Program Studi Manajemen mempelajari tentang pengelolaan sumber daya manusia, keuangan, dan operasional perusahaan untuk mencapai tujuan organisasi secara efektif dan efisien.</p>
-                    <p><strong>Akreditasi:</strong> A</p>
-                    <p><strong>Dosen Pengampu:</strong></p>
-                    <ul>
-                        <li>Dr. Andi Wijaya, M.M.</li>
-                        <li>Prof. Siti Rahmawati, M.B.A.</li>
-                        <li>Ir. Budi Santoso, M.M.</li>
-                    </ul>
-                </div>
-                <div class="card-footer text-end bg-light py-2">
-                    <a href="{{ url('/prodi') }}" class="btn btn-sm btn-outline-warning">Kembali</a>
-                </div>
-            </div>
-        </div>
-
-        
-        <div class="col-md-5 col-sm-8 col-11 mb-4">
-            <div class="card shadow-sm" style="border-radius: 10px;">
-                <div class="card-header py-2 bg-secondary text-white text-center">
-                    <strong>Teknik Elektro</strong>
-                </div>
-                <div class="card-body py-3 px-4">
-                    <p><strong>Deskripsi:</strong> Program Studi Teknik Elektro mempelajari desain, pengembangan, dan penerapan sistem listrik dan elektronik dalam berbagai bidang teknologi modern.</p>
-                    <p><strong>Akreditasi:</strong> A</p>
-                    <p><strong>Dosen Pengampu:</strong></p>
-                    <ul>
-                        <li>Dr. Andi Wijaya, M.M.</li>
-                        <li>Prof. Siti Rahmawati, M.B.A.</li>
-                        <li>Ir. Budi Santoso, M.M.</li>
-                    </ul>
-                </div>
-                <div class="card-footer text-end bg-light py-2">
-                    <a href="{{ url('/prodi') }}" class="btn btn-sm btn-outline-secondary">Kembali</a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
+        <!--end::App Content-->
 @endsection

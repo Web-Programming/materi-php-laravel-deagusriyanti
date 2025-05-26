@@ -40,7 +40,7 @@ class ProdiController extends Controller
     {
         //Form Validation
         $data = $request->validate([
-            'kode_prodi' => 'required|min:2|max:2',
+            'kode_prodi' => 'required|min:2|max:6',
             'nama' => 'required|min:5|max:25',
             'fakultas_id'=> 'required'
         ]);

@@ -4,11 +4,11 @@
 <div class="app-content-header">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-sm-6"><h3 class="mb-0">Materi</h3></div>
+      <div class="col-sm-6"><h3 class="mb-0">Mahasiswa</h3></div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-end">
           <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Data Materi</li>
+          <li class="breadcrumb-item active" aria-current="page">Data Mahasiswa</li>
         </ol>
       </div>
     </div>
@@ -23,9 +23,9 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Data Materi</h3>
+            <h3 class="card-title">Mahasiswa</h3>
             <div class="card-tools">
-              <a href="{{ url('/materi/create') }}" class="btn btn-success btn-sm">Tambah Materi</a>
+              <a href="{{ route('mahasiswa.create') }}" class="btn btn-success btn-sm">Tambah Mahasiswa</a>
             </div>
           </div>
           <div class="card-body">
@@ -42,35 +42,35 @@
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Kode Dosen</th>
-                  <th>Kode Materi</th>
-                  <th>Nama Materi</th>
+                  <th>Kode Prodi</th>
+                  <th>NPM</th>
+                  <th>Nama Mahasiswa</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach ($listmateri as $materi)
+                @foreach ($listmahasiswa as $mahasiswa)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $materi->dosen->kode_dosen ?? '-' }}</td>
-                    <td>{{ $materi->kode_materi }}</td>
-                    <td>{{ $materi->nama_materi }}</td>
+                    <td>{{ $mahasiswa->prodi->kode_prodi ?? '-' }}</td>
+                    <td>{{ $mahasiswa->npm }}</td>
+                    <td>{{ $mahasiswa->nama }}</td>
                     <td>
-                      <form action="{{ url('/materi/'.$materi->id) }}" method="POST" style="display:inline-block;">
+                      <form action="{{ route('mahasiswa.destroy', $mahasiswa->id) }}" method="POST" style="display:inline-block;">
                         @csrf
                         @method('DELETE')
 
-                        <a href="{{ url('/materi/'.$materi->id) }}" class="btn btn-sm btn-info">Detail</a>
-                        <a href="{{ url('/materi/'.$materi->id.'/edit') }}" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="{{ route('mahasiswa.show', $mahasiswa->id) }}" class="btn btn-sm btn-info">Detail</a>
+                        <a href="{{ route('mahasiswa.edit', $mahasiswa->id) }}" class="btn btn-sm btn-warning">Edit</a>
                         <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus data ini?')">Delete</button>
                       </form>
                     </td>
                   </tr>
                 @endforeach
 
-                @if($listmateri->isEmpty())
+                @if($listmahasiswa->isEmpty())
                   <tr>
-                    <td colspan="5" class="text-center">Data materi tidak tersedia.</td>
+                    <td colspan="5" class="text-center">Data mahasiswa tidak tersedia.</td>
                   </tr>
                 @endif
               </tbody>

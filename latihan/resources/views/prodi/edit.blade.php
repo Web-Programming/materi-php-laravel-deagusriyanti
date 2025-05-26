@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('title', "Halaman Detail Prodi")
+@section('title', "Halaman Edit Prodi")
 
 @section('content')
         <!--begin::App Content Header-->
@@ -9,12 +9,12 @@
           <div class="container-fluid">
             <!--begin::Row-->
             <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Dosen</h3></div>
+              <div class="col-sm-6"><h3 class="mb-0">Program Studi</h3></div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
                   <li class="breadcrumb-item"><a href="{{ url("/") }}">Home</a></li>
-                  <li class="breadcrumb-item"><a href="{{ url("/prodi") }}">Dosen</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Create Dosen</li>
+                  <li class="breadcrumb-item"><a href="{{ url("/prodi") }}">Program Studi</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Edit Program Studi</li>
                 </ol>
               </div>
             </div>
@@ -33,7 +33,7 @@
                 <!-- Default box -->
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title">Dosen</h3>
+                    <h3 class="card-title">Program Studi : ....</h3>
                     <div class="card-tools">
                       <button
                         type="button"
@@ -55,37 +55,29 @@
                     </div>
                   </div>
                   <div class="card-body">
-                    <form action="{{ url("/dosen")}}" method="post">
+
+                  <form action="{{ url("/prodi/".$prodi->id)}}" method="post">
+                      @method("PUT")
                       @csrf
-                      <div class="">
-                        <label class="">Program Studi</label>
-                        <select class="form-control" name="fakultas_id">
-                          <option value="">Pilih prodi</option>
-                          @foreach ($prodis as $item)
-                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                          @endforeach
-                        </select>
-                        
-                        @error("kode_dosen")
+                      <!-- <div class="">
+                        <label class="">Kode Prodi</label>
+                        <input class="form-control" type="text" name="kode_prodi" 
+                          value="{{ old("kode_prodi", $prodi->kode_prodi) }}">
+                        @error("kode_prodi")
                           <p class="text-danger"> {{ $message }} </p>
                         @enderror
-                      </div> 
+                      </div>    -->
                       <div class="">
-                        <label class="">Kode Dosen</label>
-                        <input class="form-control" type="text" name="kode_dosen" value="{{ old("kode_dosen") }}">
-                        @error("kode_dosen")
-                          <p class="text-danger"> {{ $message }} </p>
-                        @enderror
-                      </div>   
-                      <div class="">
-                        <label class="">Nama Dosen</label>
-                        <input class="form-control" type="text" name="nama" value="{{ old("nama") }}">
+                        <label class="">Nama Prodi</label>
+                        <input class="form-control" type="text" name="nama" 
+                        value="{{ old("nama", $prodi->nama) }}">
                         @error("nama")
                           <p class="text-danger"> {{ $message }} </p>
                         @enderror
                       </div>                            
-                      <button type="submit" class="btn btn-success">Simpan</button>
+                      <button type="submit" class="btn btn-warning">Update</button>
                     </form>
+
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer">Footer</div>

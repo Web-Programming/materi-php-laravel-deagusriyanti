@@ -2,63 +2,70 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mahasiswa;
+use App\Models\Prodi;
 use Illuminate\Http\Request;
 
 class MahasiswaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-         return view('mhs.index');
+        $listmahasiswa = Mahasiswa::with('prodi')->get();
+        return view('mahasiswa.index', compact('listmahasiswa'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view('mhs.create');
+        $prodis = Prodi::all();
+        return view('mahasiswa.create', compact('prodis'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'npm' => 'required|string|max:15|unique:mahasiswa,npm',
+            'nama' => 'required|string|max:100',
+            'prodi_id' => 'required|exists:prodis,id',
+        ]);
+
+        Mahasiswa::create($data);
+
+        return redirect()->route('mahasiswa.index')->with('status', 'Mahasiswa berhasil ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show($id)
     {
-        return view('mhs.detail');
+        $mahasiswa = Mahasiswa::with('prodi')->findOrFail($id);
+        return view('mahasiswa.show', compact('mahasiswa'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        $prodis = Prodi::all();
+        return view('mahasiswa.edit', compact('mahasiswa', 'prodis'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $mahasiswa = Mahasiswa::findOrFail($id);
+
+        $data = $request->validate([
+            'npm' => 'required|string|max:15|unique:mahasiswa,npm,' . $mahasiswa->id,
+            'nama' => 'required|string|max:100',
+            'prodi_id' => 'required|exists:prodis,id',
+        ]);
+
+        $mahasiswa->update($data);
+
+        return redirect()->route('mahasiswa.index')->with('status', 'Mahasiswa berhasil diupdate!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        $mahasiswa->delete();
+
+        return redirect()->route('mahasiswa.index')->with('status', 'Mahasiswa berhasil dihapus!');
     }
 }

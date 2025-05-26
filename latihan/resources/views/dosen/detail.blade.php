@@ -1,103 +1,75 @@
 @extends('layout.master')
 
-@section('title', 'Detail Dosen')
+@section('title', "Halaman Detail Prodi")
 
 @section('content')
-<div class="container pt-4">
-    <h4 class="mb-4 text-center">Detail Dosen</h4>
-
-    <div class="row justify-content-center">
-
-        {{-- Dosen 1 --}}
-        <div class="col-md-5 col-sm-8 col-11 mb-4">
-            <div class="card shadow-sm" style="border-radius: 10px;">
-                <div class="card-header py-2 bg-primary text-white text-center">
-                    <strong>Dosen Sistem Informasi</strong>
-                </div>
-                <div class="card-body py-3 px-4">
-                    <p class="mb-1"><strong>NIP:</strong> 1987654321</p>
-                    <p class="mb-1"><strong>Nama:</strong> Dr. Joy</p>
-                    <p class="mb-1"><strong>Fakultas:</strong> Fakultas Teknologi Informasi</p>
-                    <p class="mb-1"><strong>Program Studi:</strong> Sistem Informasi</p>
-                </div>
-                <div class="card-footer text-end bg-light py-2">
-                    <a href="{{ url('/dosen') }}" class="btn btn-sm btn-outline-primary">Kembali</a>
-                </div>
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">Dosen</h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="{{ url("/") }}">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{{ url("/dosen") }}">Dosen</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Detail  Dosen</li>
+                </ol>
+              </div>
             </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
         </div>
-
-        {{-- Dosen 2 --}}
-        <div class="col-md-5 col-sm-8 col-11 mb-4">
-            <div class="card shadow-sm" style="border-radius: 10px;">
-                <div class="card-header py-2 bg-success text-white text-center">
-                    <strong>Dosen Informatika</strong>
+        <!--end::App Content Header-->
+        <!--begin::App Content-->
+        <div class="app-content">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-12">
+                <!-- Default box -->
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Dosen : {{ $dosen->nama }}</h3>
+                    <div class="card-tools">
+                      <button
+                        type="button"
+                        class="btn btn-tool"
+                        data-lte-toggle="card-collapse"
+                        title="Collapse"
+                      >
+                        <i data-lte-icon="expand" class="bi bi-plus-lg"></i>
+                        <i data-lte-icon="collapse" class="bi bi-dash-lg"></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-tool"
+                        data-lte-toggle="card-remove"
+                        title="Remove"
+                      >
+                        <i class="bi bi-x-lg"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    ID Prodi : {{ $dosen->id }} <br>
+                    Kode Prodi : {{ $dosen->kode_dosen }} <br>
+                    Tanggal Buat : {{ $dosen->created_at }} <br>
+                    Tanggal Update : {{ $dosen->updated_at }} <br>
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="card-footer">Footer</div>
+                  <!-- /.card-footer-->
                 </div>
-                <div class="card-body py-3 px-4">
-                    <p class="mb-1"><strong>NIP:</strong> 1987001234</p>
-                    <p class="mb-1"><strong>Nama:</strong> Prof. Bing Bong</p>
-                    <p class="mb-1"><strong>Fakultas:</strong> Fakultas Teknologi Informasi</p>
-                    <p class="mb-1"><strong>Program Studi:</strong> Informatika</p>
-                </div>
-                <div class="card-footer text-end bg-light py-2">
-                    <a href="{{ url('/dosen') }}" class="btn btn-sm btn-outline-success">Kembali</a>
-                </div>
+                <!-- /.card -->
+              </div>
             </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
         </div>
-
-        {{-- Dosen 3 --}}
-        <div class="col-md-5 col-sm-8 col-11 mb-4">
-            <div class="card shadow-sm" style="border-radius: 10px;">
-                <div class="card-header py-2 bg-danger text-white text-center">
-                    <strong>Dosen Akuntansi</strong>
-                </div>
-                <div class="card-body py-3 px-4">
-                    <p class="mb-1"><strong>NIP:</strong> 1987123456</p>
-                    <p class="mb-1"><strong>Nama:</strong> Dr. Sadness</p>
-                    <p class="mb-1"><strong>Fakultas:</strong> Fakultas Ekonomi</p>
-                    <p class="mb-1"><strong>Program Studi:</strong> Akuntansi</p>
-                </div>
-                <div class="card-footer text-end bg-light py-2">
-                    <a href="{{ url('/dosen') }}" class="btn btn-sm btn-outline-danger">Kembali</a>
-                </div>
-            </div>
-        </div>
-
-        {{-- Dosen 4 --}}
-        <div class="col-md-5 col-sm-8 col-11 mb-4">
-            <div class="card shadow-sm" style="border-radius: 10px;">
-                <div class="card-header py-2 bg-warning text-white text-center">
-                    <strong>Dosen Manajemen</strong>
-                </div>
-                <div class="card-body py-3 px-4">
-                    <p class="mb-1"><strong>NIP:</strong> 1987012345</p>
-                    <p class="mb-1"><strong>Nama:</strong> Dr. Fear</p>
-                    <p class="mb-1"><strong>Fakultas:</strong> Fakultas Ekonomi</p>
-                    <p class="mb-1"><strong>Program Studi:</strong> Manajemen</p>
-                </div>
-                <div class="card-footer text-end bg-light py-2">
-                    <a href="{{ url('/dosen') }}" class="btn btn-sm btn-outline-warning">Kembali</a>
-                </div>
-            </div>
-        </div>
-
-        {{-- Dosen 5 --}}
-        <div class="col-md-5 col-sm-8 col-11 mb-4">
-            <div class="card shadow-sm" style="border-radius: 10px;">
-                <div class="card-header py-2 bg-secondary text-white text-center">
-                    <strong>Dosen Teknik Elektro</strong>
-                </div>
-                <div class="card-body py-3 px-4">
-                    <p class="mb-1"><strong>NIP:</strong> 1987098765</p>
-                    <p class="mb-1"><strong>Nama:</strong> Prof. Anger</p>
-                    <p class="mb-1"><strong>Fakultas:</strong> Fakultas Teknik</p>
-                    <p class="mb-1"><strong>Program Studi:</strong> Teknik Elektro</p>
-                </div>
-                <div class="card-footer text-end bg-light py-2">
-                    <a href="{{ url('/dosen') }}" class="btn btn-sm btn-outline-secondary">Kembali</a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
+        <!--end::App Content-->
 @endsection

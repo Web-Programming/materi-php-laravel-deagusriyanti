@@ -1,9 +1,9 @@
 @extends('layout.master')
 
-@section('title', "Halaman Detail fakultas")
+@section('title', "Halaman Create Fakultas")
 
 @section('content')
-        <!--begin::App Content Header-->
+<!--begin::App Content Header-->
         <div class="app-content-header">
           <!--begin::Container-->
           <div class="container-fluid">
@@ -23,61 +23,35 @@
           <!--end::Container-->
         </div>
         <!--end::App Content Header-->
-        <!--begin::App Content-->
-        <div class="app-content">
-          <!--begin::Container-->
-          <div class="container-fluid">
-            <!--begin::Row-->
-            <div class="row">
-              <div class="col-12">
-                <!-- Default box -->
-                <div class="card">
-                  <div class="card-header">
-                    <h3 class="card-title">Fakultas</h3>
-                    <div class="card-tools">
-                      <button
-                        type="button"
-                        class="btn btn-tool"
-                        data-lte-toggle="card-collapse"
-                        title="Collapse"
-                      >
-                        <i data-lte-icon="expand" class="bi bi-plus-lg"></i>
-                        <i data-lte-icon="collapse" class="bi bi-dash-lg"></i>
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-tool"
-                        data-lte-toggle="card-remove"
-                        title="Remove"
-                      >
-                        <i class="bi bi-x-lg"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="card-body">
-                    <form action="{{ url("/fakultas")}}" method="post">
-                      @csrf
-                     
-                      <div class="">
-                        <label class="">Nama fakultas</label>
-                        <input class="form-control" type="text" name="nama" value="{{ old("nama") }}">
-                        @error("nama")
-                          <p class="text-danger"> {{ $message }} </p>
-                        @enderror
-                      </div>                            
-                      <button type="submit" class="btn btn-success">Simpan</button>
-                    </form>
-                  </div>
-                  <!-- /.card-body -->
-                  <div class="card-footer">Footer</div>
-                  <!-- /.card-footer-->
-                </div>
-                <!-- /.card -->
-              </div>
-            </div>
-            <!--end::Row-->
+
+<div class="app-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Tambah Fakultas</h3>
           </div>
-          <!--end::Container-->
+          <div class="card-body">
+            <form action="{{ url('/fakultas') }}" method="post">
+              @csrf
+
+              <!-- Input Nama Fakultas -->
+              <div class="mb-3">
+                <label for="nama" class="form-label">Nama Fakultas</label>
+                <input type="text" name="nama" id="nama" class="form-control" value="{{ old('nama') }}">
+                @error('nama')
+                  <p class="text-danger">{{ $message }}</p>
+                @enderror
+              </div>
+
+              <button type="submit" class="btn btn-success">Simpan</button>
+            </form>
+          </div>
+          <div class="card-footer">Footer</div>
         </div>
-        <!--end::App Content-->
+      </div>
+    </div>
+  </div>
+</div>
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Prodi;
 use App\Models\Dosen;
 use Illuminate\Http\Request;
 
@@ -12,8 +13,11 @@ class DosenController extends Controller
      */
     public function index()
     {
-        
-        return view('dosen.index');
+        // Ambil semua data dosen beserta relasi prodi (jika ada)
+        $listdosen = Dosen::with('prodi')->get();
+
+        // Gunakan view 'dosen.index' dan kirim variabel 'listdosen'
+        return view('dosen.index', ['listdosen' => $listdosen]);
     }
 
     /**
@@ -21,7 +25,11 @@ class DosenController extends Controller
      */
     public function create()
     {
-        return view('dosen.create');
+        // Ambil semua data prodi untuk dropdown pilihan prodi
+        $prodis = Prodi::all();
+
+        // Kirim data prodi ke view 'dosen.create'
+        return view('dosen.create', ['prodis' => $prodis]);
     }
 
     /**
@@ -29,7 +37,18 @@ class DosenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validasi form input
+        $data = $request->validate([
+            'kode_dosen' => 'required|string|min:2|max:6',
+            'nama' => 'required|string|min:5|max:25',
+            'prodi_id' => 'required|exists:prodis,id',
+        ]);
+
+        // Simpan data dosen ke database menggunakan model Dosen (bukan Prodi)
+        Dosen::create($data);
+
+        // Redirect ke halaman dosen dengan pesan sukses
+        return redirect()->route('dosen.index')->with('status', 'Dosen berhasil ditambahkan!');
     }
 
     /**
@@ -37,7 +56,14 @@ class DosenController extends Controller
      */
     public function show(string $id)
     {
-        return view('dosen.detail');
+        // Cari dosen berdasarkan id beserta relasi prodi
+        $dosen = Dosen::with('prodi')->find($id);
+
+        if (!$dosen) {
+            return redirect()->route('dosen.index')->with('failed', 'Dosen tidak ditemukan!');
+        }
+
+        return view('dosen.show', ['dosen' => $dosen]);
     }
 
     /**
@@ -45,7 +71,18 @@ class DosenController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $dosen = Dosen::find($id);
+        if (!$dosen) {
+            return redirect()->route('dosen.index')->with('failed', 'Dosen tidak ditemukan!');
+        }
+
+        // Ambil semua prodi untuk pilihan dropdown
+        $prodis = Prodi::all();
+
+        return view('dosen.edit', [
+            'dosen' => $dosen,
+            'prodis' => $prodis
+        ]);
     }
 
     /**
@@ -53,7 +90,22 @@ class DosenController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validasi input
+        $data = $request->validate([
+            'kode_dosen' => 'required|string|min:2|max:6',
+            'nama' => 'required|string|min:5|max:25',
+            'prodi_id' => 'required|exists:prodis,id',
+        ]);
+
+        $dosen = Dosen::find($id);
+        if (!$dosen) {
+            return redirect()->route('dosen.index')->with('failed', 'Dosen tidak ditemukan!');
+        }
+
+        // Update data dosen
+        $dosen->update($data);
+
+        return redirect()->route('dosen.index')->with('status', 'Dosen berhasil diupdate!');
     }
 
     /**
@@ -61,6 +113,13 @@ class DosenController extends Controller
      */
     public function destroy(string $id)
     {
-        return view('dosen.delete');
+        $dosen = Dosen::find($id);
+
+        if ($dosen) {
+            $dosen->delete();
+            return redirect()->route('dosen.index')->with('status', 'Dosen berhasil dihapus!');
+        }
+
+        return redirect()->route('dosen.index')->with('failed', 'Dosen gagal dihapus!');
     }
 }

@@ -1,20 +1,15 @@
-@extends('layout.master')
-
-@section('title', "Halaman Detail Prodi")
-
-@section('content')
-        <!--begin::App Content Header-->
-        <div class="app-content-header">
+@extends('Layout.master')
+@section('header')
+ <div class="app-content-header">
           <!--begin::Container-->
           <div class="container-fluid">
             <!--begin::Row-->
             <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Program Studi</h3></div>
+              <div class="col-sm-6"><h3 class="mb-0">Dosen</h3></div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
-                  <li class="breadcrumb-item"><a href="{{ url("/") }}">Home</a></li>
-                  <li class="breadcrumb-item"><a href="{{ url("/prodi") }}">Program Studi</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Create Program Studi</li>
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Data</li>
                 </ol>
               </div>
             </div>
@@ -22,8 +17,9 @@
           </div>
           <!--end::Container-->
         </div>
-        <!--end::App Content Header-->
-        <!--begin::App Content-->
+@endsection
+@section('content')
+  <!--begin::App Content-->
         <div class="app-content">
           <!--begin::Container-->
           <div class="container-fluid">
@@ -33,7 +29,7 @@
                 <!-- Default box -->
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title">Program Studi</h3>
+                    <h3 class="card-title">Dosen</h3>
                     <div class="card-tools">
                       <button
                         type="button"
@@ -55,37 +51,60 @@
                     </div>
                   </div>
                   <div class="card-body">
-                    <form action="{{ url("/prodi")}}" method="post">
-                      @csrf
-                      <div class="">
-                        <label class="">Fakultas</label>
-                        <select class="form-control" name="fakultas_id">
-                          <option value="">Pilih Fakultas</option>
-                          @foreach ($fakultas as $item)
-                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                          @endforeach
-                        </select>
-                        
-                        @error("kode_prodi")
-                          <p class="text-danger"> {{ $message }} </p>
-                        @enderror
-                      </div> 
-                      <div class="">
-                        <label class="">Kode Prodi</label>
-                        <input class="form-control" type="text" name="kode_prodi" value="{{ old("kode_prodi") }}">
-                        @error("kode_prodi")
-                          <p class="text-danger"> {{ $message }} </p>
-                        @enderror
-                      </div>   
-                      <div class="">
-                        <label class="">Nama Prodi</label>
-                        <input class="form-control" type="text" name="nama" value="{{ old("nama") }}">
-                        @error("nama")
-                          <p class="text-danger"> {{ $message }} </p>
-                        @enderror
-                      </div>                            
-                      <button type="submit" class="btn btn-success">Simpan</button>
-                    </form>
+                    <!-- Menampilkaan pesan insert sukses -->
+                    @if (session("status"))
+                      <div class="alert alert-success">
+                        {{ session("status")}}
+                      </div>
+                    @endif  
+
+                    @if (session("failed"))
+                      <div class="alert alert-danger">
+                        {{ session("failed")}}
+                      </div>
+                    @endif  
+
+                    <a href="{{url("/dosen/create" )}}" class="btn btn-small btn-success">
+                        Tambah Dosen
+                    </a>
+                   <table class="table table-bordered mt-2">
+                    <tr>
+                      <th>No</th>
+                      <th>Program Studi</th>
+                      <th>Kode</th>
+                      <th>Nama</th>
+                      <th>Aksi</th>
+                    </tr>
+                    @foreach ($listdosen as $dosen) 
+                      <tr>
+                        <td>{{$loop->iteration}}</td>
+                        <td>
+                          @if ($dosen->prodi)
+                            {{$dosen->prodi->nama}}
+                          @else
+                            -
+                          @endif
+                        </td>
+                        <td>{{$dosen->kode_dosen}}</td>
+                        <td>{{$dosen->nama}}</td>
+                        <td>
+                          <form action="{{ url("/dosen/".$dosen->id) }}" method="post">
+                            @csrf
+                            @method("DELETE")
+                            <a href="{{url("/dosen/".$dosen->id )}}" class="btn btn-small btn-default">
+                              Detail
+                            </a> 
+
+                            <a href="{{url("/dosen/".$dosen->id."/edit" )}}" class="btn btn-small btn-warning">
+                              Edit
+                            </a> 
+                            <button type="submit" class="btn btn-small btn-danger">Delete</button>
+                          </form>  
+                        </td>
+                      </tr>
+                    @endforeach
+                   </table>
+
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer">Footer</div>
