@@ -13,31 +13,32 @@ class AuthController extends Controller
     // Tampilkan form login
     public function showLogin()
     {
-        return view('auth.login');
+        return view('login');
     }
 
     // Proses login
-    public function do_login(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+   public function do_login(Request $request)
+{
+    $credentials = $request->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required'],
+    ]);
 
-        if (auth()->attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended('/'); 
-        }
-
-        return back()->withErrors([
-            'email' => 'Email atau password salah',
-        ])->withInput();
+    if (auth()->attempt($credentials)) {
+        $request->session()->regenerate();
+        return redirect()->intended('/');
     }
+
+    return back()->withErrors([
+        'email' => 'Email atau password salah.',
+    ])->onlyInput('email');
+}
+
 
     // Tampilkan form register
     public function showRegister()
     {
-        return view('auth.register');
+        return view('register');
     }
 
     // Proses register

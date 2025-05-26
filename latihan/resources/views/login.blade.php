@@ -19,6 +19,12 @@
                     </div>
                 @endif
 
+                @if(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul class="mb-0">
@@ -29,7 +35,7 @@
                     </div>
                 @endif
 
-                <form method="POST" action="/login" novalidate>
+                <form method="POST" action="{{ route('login') }}" novalidate>
                     @csrf
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
@@ -61,7 +67,7 @@
 
                 <p class="mt-3 text-center">
                     Belum punya akun?
-                    <a href="/register" class="text-decoration-none">Daftar di sini</a>
+                    <a href="{{ route('register') }}" class="text-decoration-none">Daftar di sini</a>
                 </p>
             </div>
         </div>

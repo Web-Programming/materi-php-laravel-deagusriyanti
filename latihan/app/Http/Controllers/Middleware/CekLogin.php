@@ -5,29 +5,22 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
 
 class CekLogin
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
      */
-    public function handle(Request $request, Closure $next, $roles): Response
+    public function handle(Request $request, Closure $next)
     {
-        //cek jika user sudah login. jika belum arahkan ke hal. login
-        if(!Auth::check()){
-            return redirect('login');
+        if (!Auth::check()) {
+            return redirect('/login')->with('error', 'Anda harus login terlebih dahulu');
         }
 
-        //simpan data user pada var user
-        $user = Auth::user();
-        //jika level user sama dengan role, request dapat dilanjutkan
-        if($user->level === $roles){
-            return $next($request);
-        }
-        //jika user tidak memiliki akses sesuai dengan role
-        return redirect('login')->with('error', 'Maaf anda tidak memiliki akses!');
+        return $next($request);
     }
 }
